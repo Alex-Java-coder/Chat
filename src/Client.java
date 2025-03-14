@@ -51,19 +51,16 @@ class Client implements Runnable {
             out = new PrintStream(os);
 
             // читаем из сети и пишем в сеть
-            out.println("Добро пожаловать в чат!");
-            out.println("Для выхода из чата введите - exit");
+            out.println("Добро пожаловать в Супер чат!");
+            out.println("Для выхода из чата введите - пока");
             out.println("Введите имя:");
-
-            //пока не введет имя не подключиться к чату
-            //пока не знаю, но еще надо подумать
-            //а то имя не ввел, а чат видит
 
             // Основной цикл чата
             userName = in.nextLine();
             out.println("Добро пожаловать в чат, " + userName + "!");
+            server.sendAll(userName + " к чату.");
             String input = in.nextLine();
-            while (!input.equals("exit")) {
+            while (!input.equals("пока")) {
                 if (input.startsWith("@")) {
                     int spaceIndex = input.indexOf(' ');
                     if (spaceIndex != -1) {
@@ -78,6 +75,9 @@ class Client implements Runnable {
                 }
                 input = in.nextLine();
             }
+            // Уведомление остальных пользователей о выходе участника из чата
+            server.sendAll(userName + " покинул чат.");
+
             in.close();
             out.close();
             socket.close();
