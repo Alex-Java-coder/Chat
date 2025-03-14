@@ -8,9 +8,9 @@ public class ChatServer {
     ArrayList<Client> clients = new ArrayList<>();
     ServerSocket serverSocket;
 
-    //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+    //конструктор
     ChatServer() throws IOException {
-        // СЃРѕР·РґР°РµРј СЃРµСЂРІРµСЂРЅС‹Р№ СЃРѕРєРµС‚ РЅР° РїРѕСЂС‚Сѓ 1234
+        // создаем серверный сокет на порту 1234
         serverSocket = new ServerSocket(1234);
     }
 
@@ -29,10 +29,10 @@ public class ChatServer {
             System.out.println("Waiting...");
 
             try {
-                // Р¶РґРµРј РєР»РёРµРЅС‚Р° РёР· СЃРµС‚Рё
+                // ждем клиента из сети
                 Socket socket = serverSocket.accept();
                 System.out.println("Client connected!");
-                // СЃРѕР·РґР°РµРј РєР»РёРµРЅС‚Р° РЅР° СЃРІРѕРµР№ СЃС‚РѕСЂРѕРЅРµ
+                // создаем клиента на своей стороне
                 clients.add(new Client(socket, this));
 
             } catch (IOException e) {
